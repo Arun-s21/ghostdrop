@@ -1,11 +1,43 @@
 'use client';
 
 import { useState } from 'react';
+import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
 
 export default function SignUpPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Prevent the page from reloading
+    setIsSubmitting(true);
+
+    try {
+      // Send the data to our API endpoint
+      const response = await axios.post('/api/sign-up', {
+        username,
+        email,
+        password,
+      });
+      
+      // On success, show an alert and redirect
+      alert('Registration successful! Please check your email to verify.');
+      router.push(`/verify/${username}`);
+
+    } catch (error) {
+      // Handle errors from the API
+      console.error('Error in sign up of user', error);
+      const axiosError = error as AxiosError<any>;
+      let errorMessage = axiosError.response?.data.message || 'An unexpected error occurred.';
+      alert(`Sign-up failed: ${errorMessage}`);
+    } finally {
+      // This block always runs, whether success or error
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -16,7 +48,8 @@ export default function SignUpPage() {
           </h1>
           <p className="mb-4">Sign up to start receiving anonymous messages</p>
         </div>
-        <form className="space-y-6">
+        {/* Attach the onSubmit function to the form */}
+        <form onSubmit={onSubmit} className="space-y-6">
           <div>
             <label
               htmlFor="username"
@@ -29,6 +62,7 @@ export default function SignUpPage() {
               name="username"
               type="text"
               required
+              value={username}
               className="w-full border border-gray-300 p-2 rounded-lg"
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -45,6 +79,7 @@ export default function SignUpPage() {
               name="email"
               type="email"
               required
+              value={email}
               className="w-full border border-gray-300 p-2 rounded-lg"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -61,16 +96,19 @@ export default function SignUpPage() {
               name="password"
               type="password"
               required
+              value={password}
               className="w-full border border-gray-300 p-2 rounded-lg"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div>
+            {/* Disable the button and change text during submission */}
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              disabled={isSubmitting}
+              className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-500"
             >
-              Sign Up
+              {isSubmitting ? 'Signing Up...' : 'Sign Up'}
             </button>
           </div>
         </form>
