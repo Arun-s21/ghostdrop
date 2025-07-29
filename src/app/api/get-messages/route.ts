@@ -1,37 +1,37 @@
 import { NextRequest } from 'next/server';
-import jwt from 'jsonwebtoken';
+import { jwtVerify } from 'jose'; 
 import dbConnect from '@/lib/dbConnect';
 import UserModel from '@/models/User';
 
-export async function GET(request: NextRequest){
+export async function GET(request: NextRequest) {
+  await dbConnect();
 
-    await dbConnect();
+  try {
+    const token = request.cookies.get('token')?.value || '';
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
+    
+    // Verify the token using 'jose'
+    const { payload } = await jwtVerify(token, secret);
+    const userId = payload.id as string;
 
-    try{
-        const token = request.cookies.get('token')?.value || '';
-        const decodedToken = jwt.verify(token,process.env.JWT_SECRET!) as {
-            id:string
-        };
-        const user = await UserModel.findById(decodedToken.id);
+    const user = await UserModel.findById(userId);
 
-        if(!user){
-            return Response.json({
-                success:false,message:'user not found'
-            },
-        {status:404});
-        }
-
-        return Response.json({
-            success:true, message:user.messages
-        },
-    {status:200});
-    }
-    catch(error){
-        console.error('Error occured:',error);
-        return Response.json({
-            success:false, message:'Error occurred'
-        },
-    {status:401});
+    if (!user) {
+      return Response.json(
+        { success: false, message: 'User not found' },
+        { status: 404 }
+      );
     }
 
+    return Response.json(
+      { success: true, messages: user.messages },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('An unexpected error occurred:', error);
+    return Response.json(
+      { success: false, message: 'Invalid token or unexpected error' },
+      { status: 401 }
+    );
+  }
 }
