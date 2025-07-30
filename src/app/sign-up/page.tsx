@@ -12,29 +12,27 @@ export default function SignUpPage() {
   const router = useRouter();
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent the page from reloading
+    event.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Send the data to our API endpoint
-      const response = await axios.post('/api/sign-up', {
+      // FIX: Removed 'const response =' as it was unused
+      await axios.post('/api/sign-up', {
         username,
         email,
         password,
       });
       
-      // On success, show an alert and redirect
       alert('Registration successful! Please check your email to verify.');
       router.push(`/verify/${username}`);
 
     } catch (error) {
-      // Handle errors from the API
       console.error('Error in sign up of user', error);
       const axiosError = error as AxiosError<any>;
-      let errorMessage = axiosError.response?.data.message || 'An unexpected error occurred.';
+      // FIX: Changed 'let' to 'const'
+      const errorMessage = axiosError.response?.data.message || 'An unexpected error occurred.';
       alert(`Sign-up failed: ${errorMessage}`);
     } finally {
-      // This block always runs, whether success or error
       setIsSubmitting(false);
     }
   };
