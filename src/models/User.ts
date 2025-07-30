@@ -1,4 +1,4 @@
-import { verify } from 'crypto';
+
 import mongoose, {Schema} from 'mongoose';
 
 const UserSchema = new Schema({

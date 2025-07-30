@@ -19,15 +19,13 @@ export default function SignInPage() {
         email,
         password,
       });
-
-      // On success, redirect to the dashboard
-      router.replace('/dashboard');    // replaces the /sign-in url to /dashboard i.e user cant go back after signing in
-      //if we do router.push like we did before then user can go back to the previous page it works like a stack
-
+      router.replace('/dashboard');
     } catch (error) {
       console.error('Error during sign-in:', error);
-      const axiosError = error as AxiosError<any>;
-      let errorMessage = axiosError.response?.data.message || 'An unexpected error occurred.';
+      // FIX: Added a specific type for the error
+      const axiosError = error as AxiosError<{ message: string }>;
+      // FIX: Changed 'let' to 'const'
+      const errorMessage = axiosError.response?.data.message || 'An unexpected error occurred.';
       alert(`Login failed: ${errorMessage}`);
     } finally {
       setIsSubmitting(false);

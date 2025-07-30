@@ -36,7 +36,7 @@ export async function GET(request:NextRequest){
       },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (_error) {
     return Response.json(
       { success: false, message: 'Invalid token or unexpected error' },
       { status: 401 }
