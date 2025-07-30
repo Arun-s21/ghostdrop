@@ -1,24 +1,46 @@
-import { resend } from "@/lib/resend";
-import VerificationEmail from "@/emails/VerificationEmail";
+import * as SibApiV3Sdk from '@getbrevo/brevo';
 
 export async function sendVerificationEmail(
-    email:string,
-    username:string,
-    verifyCode:string
-){
-    console.log("RESEND_API_KEY:", process.env.RESEND_API_KEY);
-    try{
-       const data = await resend.emails.send({
-            from:'onboarding@resend.dev',
-            to:email,
-            subject:'GhostDrop | Verification Code',
-            react: VerificationEmail({username,otp:verifyCode}),
-        });
-        console.log("Resend response:", data);
-        return {success:true,message:'Verification email sent successfully.'};
-    }
-    catch (emailError) {
-  console.error('Full error sending verification email:', emailError); // Log the full error
-  return { success: false, message: 'Failed to send verification email.' };
-}
+  email: string,
+  username: string,
+  verifyCode: string
+) {
+  // Create an instance of the Brevo API
+  const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+
+  // Set your API key
+  apiInstance.setApiKey(
+    SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
+    process.env.BREVO_API_KEY!
+  );
+
+  // Define the sender and recipient
+  const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+  sendSmtpEmail.sender = {
+    name: 'GhostDrop',
+    email: 'noreply@ghostdrop.com', // You might need to configure this in Brevo
+  };
+  sendSmtpEmail.to = [{ email: email, name: username }];
+  sendSmtpEmail.subject = 'GhostDrop | Verification Code';
+  // Create the HTML content for the email
+  sendSmtpEmail.htmlContent = `
+    <html>
+      <body>
+        <h2>Hello ${username},</h2>
+        <p>Thank you for signing up for GhostDrop. Please use the following code to verify your account:</p>
+        <h3>${verifyCode}</h3>
+        <p>If you did not request this, please ignore this email.</p>
+      </body>
+    </html>
+  `;
+
+  try {
+    // Send the email
+    await apiInstance.sendTransacEmail(sendSmtpEmail);
+    // Return a success response
+    return { success: true, message: 'Verification email sent successfully.' };
+  } catch (error) {
+    console.error('Error sending verification email via Brevo:', error);
+    return { success: false, message: 'Failed to send verification email.' };
+  }
 }
