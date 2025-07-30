@@ -1,4 +1,4 @@
-GhostDrop 👻
+GhostDrop
 Receive anonymous messages and feedback from your friends, colleagues, and the world.
 
 Live demo link: https://ghostdrop-alpha.vercel.app/
@@ -67,7 +67,7 @@ Set up your environment variables
 
 Create a file named .env in the root of the project.
 
-Add the following variables, replacing the placeholder values with your own keys:
+Add the following variables:
 
 DATABASE_URL=your_mongodb_connection_string
 JWT_SECRET=your_super_secret_jwt_key
@@ -82,4 +82,4 @@ The application should now be running at http://localhost:3000.
 Contact
 Arun Singh - arunsng18@gmail.com
 
-Project Link: https://github.com/Arun-s21/ghostdrop <!-- Replace this with your actual repo URL -->
+Project Link: https://github.com/Arun-s21/ghostdrop
