@@ -5,24 +5,24 @@ export async function sendVerificationEmail(
   username: string,
   verifyCode: string
 ) {
-  // Create an instance of the Brevo API
+  // instance of the Brevo API
   const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
-  // Set your API key
+  // set API key
   apiInstance.setApiKey(
     SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
     process.env.BREVO_API!
   );
 
-  // Define the sender and recipient
+  // Defining the sender and recipient
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
   sendSmtpEmail.sender = {
     name: 'GhostDrop',
-    email: 'arunsng18@gmail.com', // You might need to configure this in Brevo
+    email: 'arunsng18@gmail.com', 
   };
   sendSmtpEmail.to = [{ email: email, name: username }];
   sendSmtpEmail.subject = 'GhostDrop | Verification Code';
-  // Create the HTML content for the email
+  // Creating the HTML content for the email
   sendSmtpEmail.htmlContent = `
     <html>
       <body>
@@ -35,9 +35,9 @@ export async function sendVerificationEmail(
   `;
 
   try {
-    // Send the email
+    // Sending the email
     await apiInstance.sendTransacEmail(sendSmtpEmail);
-    // Return a success response
+    // Returning a success response
     return { success: true, message: 'Verification email sent successfully.' };
   } catch (error) {
     console.error('Error sending verification email via Brevo:', error);

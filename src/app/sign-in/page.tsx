@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 export default function SignInPage() {
   const [email, setEmail] = useState('');
@@ -85,6 +86,14 @@ export default function SignInPage() {
               {isSubmitting ? 'Signing In...' : 'Sign In'}
             </button>
           </div>
+          <div className="text-center mt-4">
+  <p className='text-gray-800'>
+    New user?{' '}
+    <Link href="/sign-up" className="text-blue-600 hover:underline">
+      Sign up
+    </Link>
+  </p>
+</div>
         </form>
       </div>
     </div>
