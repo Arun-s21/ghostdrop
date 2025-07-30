@@ -11,7 +11,7 @@ export async function sendVerificationEmail(
   // Set your API key
   apiInstance.setApiKey(
     SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
-    process.env.BREVO_API_KEY!
+    process.env.BREVO_API!
   );
 
   // Define the sender and recipient
