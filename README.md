@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+GhostDrop 👻
+Receive anonymous messages and feedback from your friends, colleagues, and the world.
 
-## Getting Started
+Live demo link: https://ghostdrop-alpha.vercel.app/
 
-First, run the development server:
+About The Project
+GhostDrop is a full-stack anonymous messaging application built with a modern technology stack. It provides a secure and engaging platform for users to receive feedback and messages without the sender needing to reveal their identity. Each user gets a unique, shareable link that they can post on social media or send to friends. Anyone with the link can drop a message, which the user can then view and manage on their private, protected dashboard.
 
-```bash
+This project was built to demonstrate a comprehensive understanding of full-stack web development, including user authentication, database management, API design, and modern frontend development with Next.js and React.
+
+Key Features
+User Authentication: Secure user registration with email verification and password hashing.
+
+Protected Dashboard: A private, authenticated dashboard for users to view their received messages.
+
+Unique Shareable Links: Each user gets a unique public URL (e.g., ghostdrop.com/u/username) to share.
+
+Anonymous Messaging: Anyone with the link can send a message without needing an account.
+
+Message Management: Users can view all their messages, sorted by the most recent.
+
+Secure Sessions: Uses JWTs (JSON Web Tokens) stored in HttpOnly cookies for secure session management.
+
+Tech Stack
+This project is built with a modern, scalable, and secure technology stack:
+
+Framework: Next.js
+
+Frontend: React, Tailwind CSS
+
+Backend: Next.js API Routes
+
+Database: MongoDB with Mongoose
+
+Authentication: jose for JWTs, bcryptjs for password hashing
+
+Email Service: Brevo for transactional emails
+
+Deployment: Vercel
+
+Getting Started
+To get a local copy up and running, follow these simple steps.
+
+Prerequisites
+Node.js (v18 or later)
+
+npm
+
+A free MongoDB Atlas account
+
+A free Brevo account
+
+Installation
+Clone the repo
+
+git clone https://github.com/your-username/ghostdrop.git
+
+Navigate to the project directory
+
+cd ghostdrop
+
+Install NPM packages
+
+npm install
+
+Set up your environment variables
+
+Create a file named .env in the root of the project.
+
+Add the following variables, replacing the placeholder values with your own keys:
+
+DATABASE_URL=your_mongodb_connection_string
+JWT_SECRET=your_super_secret_jwt_key
+BREVO_API_KEY=your_brevo_api_key
+
+Run the development server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application should now be running at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Contact
+Arun Singh - arunsng18@gmail.com
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Project Link: https://github.com/Arun-s21/ghostdrop <!-- Replace this with your actual repo URL -->
