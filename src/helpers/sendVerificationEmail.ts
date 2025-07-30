@@ -18,7 +18,7 @@ export async function sendVerificationEmail(
   const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
   sendSmtpEmail.sender = {
     name: 'GhostDrop',
-    email: 'arunsng18@gmai.com', // You might need to configure this in Brevo
+    email: 'arunsng18@gmail.com', // You might need to configure this in Brevo
   };
   sendSmtpEmail.to = [{ email: email, name: username }];
   sendSmtpEmail.subject = 'GhostDrop | Verification Code';
