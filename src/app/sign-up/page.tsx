@@ -43,10 +43,10 @@ export default function SignUpPage() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 text-gray-800">
             Join GhostDrop
           </h1>
-          <p className="mb-4">Sign up to start receiving anonymous messages</p>
+          <p className="mb-4 text-gray-600">Sign up to start receiving anonymous messages</p>
         </div>
         {/* Attach the onSubmit function to the form */}
         <form onSubmit={onSubmit} className="space-y-6">
@@ -108,7 +108,7 @@ export default function SignUpPage() {
               disabled={isSubmitting}
               className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-500"
             >
-              {isSubmitting ? 'Signing Up...' : 'Sign Up'}
+              {isSubmitting ? 'Signing You Up...(Anonymously)' : 'Sign Up'}
             </button>
           </div>
         </form>

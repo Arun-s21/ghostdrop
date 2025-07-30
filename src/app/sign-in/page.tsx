@@ -38,10 +38,10 @@ export default function SignInPage() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 text-gray-800">
             Welcome Back to GhostDrop
           </h1>
-          <p className="mb-4">Sign in to continue your secret conversations</p>
+          <p className="mb-4 text-gray-600">Sign in to continue your secret conversations</p>
         </div>
         <form onSubmit={onSubmit} className="space-y-6">
           <div>
@@ -57,7 +57,7 @@ export default function SignInPage() {
               type="email"
               required
               value={email}
-              className="w-full border border-gray-300 p-2 rounded-lg"
+              className="w-full border border-gray-800 p-2 rounded-lg"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -74,7 +74,7 @@ export default function SignInPage() {
               type="password"
               required
               value={password}
-              className="w-full border border-gray-300 p-2 rounded-lg"
+              className="w-full border border-gray-800 p-2 rounded-lg"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

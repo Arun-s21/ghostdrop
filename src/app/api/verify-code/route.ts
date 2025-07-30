@@ -16,6 +16,15 @@ export async function POST(request: Request) {
       );
     }
 
+    if(user.isVerified){
+      return Response.json(
+        {
+          success:true,message:'User is already verified'
+        },
+        {status:200}
+      );
+    }
+
     // Check if the code is correct and not expired
     const isCodeValid = user.verifyCode === code;
     const isCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date();

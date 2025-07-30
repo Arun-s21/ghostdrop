@@ -10,7 +10,7 @@ export default function SendMessagePage(){
     const [content,setContent] = useState('');
     const[isSubmitting,setIsSubmitting]  = useState(false);
 
-    const onSubmit = async () => {
+    const onSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
 
@@ -40,17 +40,46 @@ export default function SendMessagePage(){
 
     return (
 
-        <div>
-            <h1>Public Message Page for {params.username}</h1>
-            <p>You can send an anonymouse message to {params.username}</p>
-            <form onSubmit={onSubmit}>
-                <label htmlFor="content">Your Message:</label>
-                <br />
-                <textarea id="content" rows={5} value={content} onChange={(e)=>setContent(e.target.value)}/>
-                <br />
-                <button type = "submit" disabled={isSubmitting}>{isSubmitting? 'Sending...please wait' : 'Send Message'}</button>
-            </form>
+         
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+        <div className="text-center">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+            Public Message for {params.username}
+          </h1>
+          <p className="mb-4 text-gray-600">
+            Send an anonymous message to {params.username}
+          </p>
         </div>
+        <form onSubmit={onSubmit} className="space-y-6">
+          <div>
+            <label
+              htmlFor="content"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Your Message:
+            </label>
+            <textarea
+              id="content"
+              rows={5}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="w-full border border-gray-300 p-2 rounded-lg mt-1"
+              required
+            />
+          </div>
+          <div>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-500"
+            >
+              {isSubmitting ? 'Sending...please wait' : 'Send Message'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
 
 
 
