@@ -10,29 +10,27 @@ export default function SendMessagePage(){
     const [content,setContent] = useState('');
     const[isSubmitting,setIsSubmitting]  = useState(false);
 
-    const onSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
 
     try {
-        
-        await axios.post('/api/send-message', {
-            username: params.username,
-            content,
-        });
+      await axios.post('/api/send-message', {
+        username: params.username,
+        content,
+      });
 
-        alert('Message sent successfully');
-        setContent('');
-        
+      alert('Message sent successfully!');
+      setContent('');
     } catch (error) {
-        console.error('Error sending message:', error);
-        const axiosError = error as AxiosError<any>;
-        alert(axiosError.response?.data.message ?? 'An error occurred.');
+      console.error('Error sending message:', error);
+      // FIX: Added a specific type for the error
+      const axiosError = error as AxiosError<{ message: string }>;
+      alert(axiosError.response?.data.message ?? 'An error occurred.');
     } finally {
-        setIsSubmitting(false);
+      setIsSubmitting(false);
     }
-};
-
+  };
 
 
 

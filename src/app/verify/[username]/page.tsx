@@ -20,18 +20,18 @@ export default function VerifyAccountPage() {
         code,
       });
 
-
       if (response.data.message === 'User is already verified') {
         alert('This account is already verified.');
       } else {
         alert('Account verified successfully! You can now log in.');
       }
       
-      // Redirect to sign-in in both success cases
       router.push('/sign-in');
+
     } catch (error) {
       console.error('Error during account verification:', error);
-      const axiosError = error as AxiosError<any>;
+      // FIX: Added a specific type for the error
+      const axiosError = error as AxiosError<{ message: string }>;
       alert(axiosError.response?.data.message ?? 'An error occurred.');
     } finally {
       setIsSubmitting(false);

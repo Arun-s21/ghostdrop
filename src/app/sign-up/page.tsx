@@ -16,7 +16,6 @@ export default function SignUpPage() {
     setIsSubmitting(true);
 
     try {
-      // FIX: Removed 'const response =' as it was unused
       await axios.post('/api/sign-up', {
         username,
         email,
@@ -28,7 +27,8 @@ export default function SignUpPage() {
 
     } catch (error) {
       console.error('Error in sign up of user', error);
-      const axiosError = error as AxiosError<any>;
+      // FIX: Added a specific type for the error
+      const axiosError = error as AxiosError<{ message: string }>;
       // FIX: Changed 'let' to 'const'
       const errorMessage = axiosError.response?.data.message || 'An unexpected error occurred.';
       alert(`Sign-up failed: ${errorMessage}`);
