@@ -20,7 +20,7 @@ export default function SignInPage() {
         email,
         password,
       });
-      router.replace('/dashboard');
+      window.location.href = '/dashboard'
     } catch (error) {
       console.error('Error during sign-in:', error);
       // FIX: Added a specific type for the error
