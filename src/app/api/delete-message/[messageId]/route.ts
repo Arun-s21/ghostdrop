@@ -21,6 +21,7 @@ export async function DELETE(
     {params}:{params:{messageId:string}}
 ){
     await dbConnect();
+    await params;
     const {messageId} = params;
 
     try{

@@ -36,6 +36,23 @@ export default function DashboardPage() {
     fetchData();
   }, []);
 
+// This function now handles everything: the API call and the UI update
+  const handleDeleteMessage = async (messageId: string) => {
+    //  the message from the screen immediately
+    setMessages(messages.filter((message) => message._id !== messageId));
+    alert('Message successfully deleted');    
+    try {
+      // Send the delete request to the backend in the background
+      await axios.delete(`/api/delete-message/${messageId}`);
+    } catch (error) {
+      console.error("Error deleting message", error);
+      alert('Failed to delete message. Please try again.');
+      
+    }
+  };
+
+
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-100 flex justify-center items-center">
@@ -68,6 +85,13 @@ export default function DashboardPage() {
                 <p className="text-xs text-gray-500 mt-2">
                   Received at: {new Date(message.createdAt).toLocaleString()}
                 </p>
+                <button
+                  onClick={() => handleDeleteMessage(message._id)}
+                  className="bg-red-500 text-white w-6 h-6 cursor-pointer flex items-center justify-center hover:bg-red-600 transition-colors"
+                  
+                >
+                  &times;
+                </button>
               </div>
             ))}
           </div>
