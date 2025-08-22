@@ -16,13 +16,11 @@ import { jwtVerify } from 'jose';
 // the tokenPayload, find that specific user in the database and pullout its message 
 // which has the specific messageId
 
-export async function DELETE(
-    request:NextRequest,
-    {params}:{params:{messageId:string}}
-){
+export async function DELETE(request:NextRequest){
     await dbConnect();
-    await params;
-    const {messageId} = params;
+        const url = new URL(request.url);
+    const messageId = url.pathname.split('/').pop(); // Gets the last part of the URL
+
 
     try{
 

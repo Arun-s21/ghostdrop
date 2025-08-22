@@ -2,14 +2,13 @@
 
 import { useState } from 'react';
 import axios, { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function SignInPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const router = useRouter();
+
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

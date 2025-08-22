@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
 import dbConnect from '@/lib/dbConnect';
 import UserModel from '@/models/User';
+import { AxiosError } from 'axios';
 //this api is used for sending the logged in user's username,email etc to the frontend 
 //this special api is used even tho we had stored the user's information in the jwt cookie
 //because our cookie has the httpOnly flag which means our frontend cant access the cookie
@@ -40,7 +41,8 @@ export async function GET(request:NextRequest){
       },
       { status: 200 }
     );
-  } catch (_error) {
+  } catch (error) {
+    const err = error as AxiosError;
     return Response.json(
       { success: false, message: 'Invalid token or unexpected error' },
       { status: 401 }

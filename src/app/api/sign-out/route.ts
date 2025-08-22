@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { AxiosError } from "axios";
-import { accessSync } from "node:fs";
 export async function GET(){
     try{
         const response = NextResponse.json({
