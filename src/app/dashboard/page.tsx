@@ -64,6 +64,12 @@ export default function DashboardPage() {
   }
 
   const profileUrl = `${window.location.origin}/u/${username}`;
+  
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(profileUrl);
+    alert('Profile URL copied to clipboard!');
+  };
+
 
   return (
     <div className="min-h-screen p-4">
@@ -74,11 +80,18 @@ export default function DashboardPage() {
         <h2 className="text-2xl font-bold mb-3 text-gray-800">Your Unique Link</h2>
         <p className="text-gray-600">Share this link with others to receive messages:</p>
         <p className="font-bold text-blue-600 mt-2">{profileUrl}</p>
+        <button
+            onClick={copyToClipboard}
+            className="bg-blue-600 text-white px-4 py-2 cursor-pointer rounded-r-lg hover:bg-blue-700"
+          >
+            Copy to clipboard
+          </button>
+
         <hr className="my-6" />
         <h2 className="text-2xl font-bold mb-4 text-gray-800">Messages Received</h2>
         {messages.length > 0 ? (
           <div className="space-y-4">
-            {/* FIX: Changed (message: any) to (message: Message) */}
+        
             {messages.map((message: Message) => (
               <div key={message._id} className="bg-gray-50 p-4 rounded-lg shadow">
                 <p className="text-gray-800">{message.content}</p>
