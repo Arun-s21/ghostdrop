@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import Link from 'next/link';
+import toast from 'react-hot-toast';
 
 export default function SignInPage() {
   const [email, setEmail] = useState('');
@@ -20,13 +21,14 @@ export default function SignInPage() {
         password,
       });
       window.location.href = '/dashboard'
+      toast.success('Log in successful, Redirecting...');
     } catch (error) {
       console.error('Error during sign-in:', error);
       // FIX: Added a specific type for the error
       const axiosError = error as AxiosError<{ message: string }>;
       // FIX: Changed 'let' to 'const'
       const errorMessage = axiosError.response?.data.message || 'An unexpected error occurred.';
-      alert(`Login failed: ${errorMessage}`);
+      toast.error(`Login failed: ${errorMessage}`);
     } finally {
       setIsSubmitting(false);
     }

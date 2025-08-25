@@ -3,6 +3,7 @@
 import {useParams} from 'next/navigation';
 import {useState} from 'react';
 import axios , {AxiosError} from 'axios';
+import toast from 'react-hot-toast';
 
 export default function SendMessagePage(){
 
@@ -20,13 +21,13 @@ export default function SendMessagePage(){
         content,
       });
 
-      alert('Message sent successfully!');
+      toast.success('Message sent successfully!');
       setContent('');
     } catch (error) {
       console.error('Error sending message:', error);
       // FIX: Added a specific type for the error
       const axiosError = error as AxiosError<{ message: string }>;
-      alert(axiosError.response?.data.message ?? 'An error occurred.');
+      toast.error(axiosError.response?.data.message ?? 'An error occurred.');
     } finally {
       setIsSubmitting(false);
     }

@@ -3,6 +3,7 @@
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import axios, { AxiosError } from 'axios';
+import toast from 'react-hot-toast';
 
 export default function VerifyAccountPage() {
   const router = useRouter();
@@ -21,9 +22,9 @@ export default function VerifyAccountPage() {
       });
 
       if (response.data.message === 'User is already verified') {
-        alert('This account is already verified.');
+        toast.success('This account is already verified.');
       } else {
-        alert('Account verified successfully! You can now log in.');
+        toast.success('Account verified successfully! You can now log in.');
       }
       
       router.push('/sign-in');
@@ -32,7 +33,7 @@ export default function VerifyAccountPage() {
       console.error('Error during account verification:', error);
       // FIX: Added a specific type for the error
       const axiosError = error as AxiosError<{ message: string }>;
-      alert(axiosError.response?.data.message ?? 'An error occurred.');
+      toast.error(axiosError.response?.data.message ?? 'An error occurred.');
     } finally {
       setIsSubmitting(false);
     }

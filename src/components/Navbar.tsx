@@ -5,6 +5,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { AxiosError } from 'axios';
 import { useEffect,useState } from 'react';
+import toast from 'react-hot-toast';
 
 
 
@@ -50,7 +51,7 @@ checkLoginStatus();
   const handleSignOut=async()=>{
     try{
       await axios.get('/api/sign-out');
-      alert('Log out successful, Now redirecting...');
+      toast.success('Log out successful, Now redirecting...');
       setIsLoggedIn(false);
       router.replace('/');                                  //redirecting to homepage after sign out
 
@@ -58,7 +59,7 @@ checkLoginStatus();
     catch(err){
       const error = err as AxiosError;
       console.log('Error occurred while signing out ',error);
-      alert('Some unexpected error occurred while signing out');
+      toast.error('Some unexpected error occurred while signing out');
     }
 
 

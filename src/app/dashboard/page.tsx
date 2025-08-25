@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 type Message = {
   _id: string;
@@ -40,13 +41,13 @@ export default function DashboardPage() {
   const handleDeleteMessage = async (messageId: string) => {
     //  the message from the screen immediately
     setMessages(messages.filter((message) => message._id !== messageId));
-    alert('Message successfully deleted');    
+    toast.success('Message successfully deleted');    
     try {
       // Send the delete request to the backend in the background
       await axios.delete(`/api/delete-message/${messageId}`);
     } catch (error) {
       console.error("Error deleting message", error);
-      alert('Failed to delete message. Please try again.');
+      toast.error('Failed to delete message. Please try again.');
       
     }
   };
@@ -67,7 +68,7 @@ export default function DashboardPage() {
   
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl);
-    alert('Profile URL copied to clipboard!');
+    toast.success('Profile URL copied to clipboard!');
   };
 
 

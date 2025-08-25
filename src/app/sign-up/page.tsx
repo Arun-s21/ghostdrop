@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 export default function SignUpPage() {
   const [username, setUsername] = useState('');
@@ -22,7 +23,7 @@ export default function SignUpPage() {
         password,
       });
       
-      alert('Registration successful! Please check your email to verify.');
+      toast.success('Registration successful! Please check your email to verify.');
       router.push(`/verify/${username}`);
 
     } catch (error) {
@@ -31,7 +32,7 @@ export default function SignUpPage() {
       const axiosError = error as AxiosError<{ message: string }>;
       // FIX: Changed 'let' to 'const'
       const errorMessage = axiosError.response?.data.message || 'An unexpected error occurred.';
-      alert(`Sign-up failed: ${errorMessage}`);
+      toast.error(`Sign-up failed: ${errorMessage}`);
     } finally {
       setIsSubmitting(false);
     }
