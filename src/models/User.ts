@@ -4,7 +4,7 @@ import mongoose, {Schema} from 'mongoose';
 const UserSchema = new Schema({
     username : {
         type:String,
-        required:[true,'Username is already taken'],
+        required:[true,'Username is required'],             //if the validation fails(user doesnt enter username) then send username is required message
         trim:true,
         unique:true
     },
