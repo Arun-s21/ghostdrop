@@ -80,7 +80,7 @@ export default function SignInPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-500"
+              className="w-full py-2 px-4 cursor-pointer bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-500"
             >
               {isSubmitting ? 'Signing In...' : 'Sign In'}
             </button>

@@ -88,12 +88,12 @@ checkLoginStatus();
       {/* //if logged in, then render a sign out button */}
       {isLoading? null : isLoggedIn ? (                           //first check if the api response is loading,until it is true render nothing i.e null because we dont want it to show or flash any button for a split second while the api is checking the token and isLoading is set to true, as it becomes false check isLoggedIn 
        <div className="flex items-center space-x-4">
-            <Link href="/dashboard" className="font-semibold text-gray-600 hover:text-gray-900">
+            <Link href="/dashboard" className="font-semibold cursor-pointer text-gray-600 hover:text-gray-900">
               Dashboard
             </Link>
             <button
               onClick={handleSignOut}
-              className="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-800 "
+              className="px-3 py-1 cursor-pointer bg-red-600 text-white rounded-md hover:bg-red-800 "
 
             >
               Sign Out
@@ -105,7 +105,7 @@ checkLoginStatus();
          // If logged out, show the Login button
           <button
             onClick={() => router.push('/sign-in')}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-800 transition-colors"
+            className="bg-blue-600 text-white cursor-pointer px-4 py-2 rounded-md hover:bg-blue-800 transition-colors"
           >
             Login
           </button>

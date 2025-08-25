@@ -20,7 +20,7 @@ export default function Home() {
         </p>
         <button
           onClick={() => router.push('/sign-up')} 
-          className="px-6 py-3 font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors"
+          className="px-6 py-3 cursor-pointer font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors"
         >
           Lets Begin
         </button>
