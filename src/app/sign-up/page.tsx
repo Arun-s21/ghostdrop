@@ -28,7 +28,7 @@ export default function SignUpPage() {
 
     } catch (error) {
       console.error('Error in sign up of user', error);
-      // FIX: Added a specific type for the error
+      
       const axiosError = error as AxiosError<{ message: string }>;
       // FIX: Changed 'let' to 'const'
       const errorMessage = axiosError.response?.data.message || 'An unexpected error occurred.';
