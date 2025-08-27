@@ -47,7 +47,7 @@ export default function SignUpPage() {
           </h1>
           <p className="mb-4 text-gray-600">Sign up to start receiving anonymous messages</p>
         </div>
-        {/* Attach the onSubmit function to the form */}
+        
         <form onSubmit={onSubmit} className="space-y-6">
           <div>
             <label
