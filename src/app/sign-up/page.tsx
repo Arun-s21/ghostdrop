@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useDebounceCallback } from 'usehooks-ts';
 
 export default function SignUpPage() {
   const [username, setUsername] = useState('');
@@ -11,6 +12,8 @@ export default function SignUpPage() {
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const [usernameMessage,setUsernameMessage] = useState('');        //message to display the user 
+  const[isCheckingUsername,setIsCheckingUsername] = useState(false);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -38,14 +41,44 @@ export default function SignUpPage() {
     }
   };
 
+const debouncedCheckUsername = useDebounceCallback(async (username:string)=>{
+  if(username){         //if user has finished typing the username
+    setIsCheckingUsername(true);
+    setUsernameMessage('');
+  }
+
+  try{
+    const response = await axios.post('/api/check-username-unique',{username:username});
+    setUsernameMessage(response.data.message);
+  }
+  catch(err){
+    const error = err as AxiosError<{message:string}>;
+    setUsernameMessage(error.response?.data.message ?? 'Error checking username');
+
+  }
+  finally{
+    setIsCheckingUsername(false);
+  }
+},500);           //500ms delay
+
+
+  useEffect(()=>{
+    debouncedCheckUsername(username);
+
+
+  },[username]);           //this useEffect acts as a watcher for the username, everytime it changes, it calls the debouncedCheckUsername function
+
+
+
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen ">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 text-gray-800">
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 text-black">
             Join GhostDrop
           </h1>
-          <p className="mb-4 text-gray-600">Sign up to start receiving anonymous messages</p>
+          <p className="mb-4 text-black">Sign up to start receiving anonymous messages</p>
         </div>
         
         <form onSubmit={onSubmit} className="space-y-6">
@@ -62,9 +95,11 @@ export default function SignUpPage() {
               type="text"
               required
               value={username}
-              className="w-full border border-gray-300 p-2 rounded-lg"
+              className="w-full border border-gray-300 p-2 rounded-lg text-black"
               onChange={(e) => setUsername(e.target.value)}
             />
+            {isCheckingUsername && <p>Checking...</p>}
+          <p className='text-black'>{usernameMessage}</p>
           </div>
           <div>
             <label
@@ -79,7 +114,7 @@ export default function SignUpPage() {
               type="email"
               required
               value={email}
-              className="w-full border border-gray-300 p-2 rounded-lg"
+              className="w-full border text-black border-gray-300 p-2 rounded-lg"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -96,7 +131,7 @@ export default function SignUpPage() {
               type="password"
               required
               value={password}
-              className="w-full border border-gray-300 p-2 rounded-lg"
+              className="w-full border text-black border-gray-300 p-2 rounded-lg"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
