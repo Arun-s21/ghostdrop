@@ -57,7 +57,7 @@ export default function SignInPage() {
               type="email"
               required
               value={email}
-              className="w-full border border-gray-800 p-2 rounded-lg"
+              className="w-full border text-black border-gray-800 p-2 rounded-lg"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -74,7 +74,7 @@ export default function SignInPage() {
               type="password"
               required
               value={password}
-              className="w-full border border-gray-800 p-2 rounded-lg"
+              className="w-full border text-black border-gray-800 p-2 rounded-lg"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
