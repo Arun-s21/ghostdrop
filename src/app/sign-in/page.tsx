@@ -24,9 +24,8 @@ export default function SignInPage() {
       toast.success('Log in successful, Redirecting...');
     } catch (error) {
       console.error('Error during sign-in:', error);
-      // FIX: Added a specific type for the error
       const axiosError = error as AxiosError<{ message: string }>;
-      // FIX: Changed 'let' to 'const'
+     
       const errorMessage = axiosError.response?.data.message || 'An unexpected error occurred.';
       toast.error(`Login failed: ${errorMessage}`);
     } finally {
