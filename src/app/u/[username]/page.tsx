@@ -37,53 +37,54 @@ export default function SendMessagePage(){
 
 
 
-    return (
-
-         
-    <div className="flex flex-col items-center justify-center min-h-screen ">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+    
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-black/60">
+      <div className="w-full max-w-lg p-8 space-y-6 bg-white/10 border border-slate-700 rounded-2xl shadow-xl backdrop-blur-md">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 text-gray-800">
-            Public Message for {params.username}
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
+            Public Message for <span className="text-cyan-400">{params.username}</span>
           </h1>
-          <p className="mb-4 text-gray-600">
+          <p className="text-gray-300">
             Send an anonymous message to {params.username}
           </p>
         </div>
+
         <form onSubmit={onSubmit} className="space-y-6">
           <div>
             <label
               htmlFor="content"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-300 mb-1"
             >
-              Your Message:
+              Your Message
             </label>
             <textarea
               id="content"
               rows={5}
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              className="w-full border border-gray-300 p-2 rounded-lg mt-1"
+              className="w-full border border-slate-600 bg-slate-900/50 text-gray-100 p-3 rounded-lg resize-none focus:ring-2 focus:ring-cyan-400 focus:outline-none transition"
+              placeholder="Write a message here..."
               required
             />
           </div>
+
           <div>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-500"
+              className="w-full py-3 px-4 text-lg font-bold text-white rounded-md 
+                       relative overflow-hidden border border-cyan-400 
+                       shadow-[0_0_15px_rgba(6,182,212,0.6)] 
+                       hover:shadow-[0_0_25px_rgba(6,182,212,1)] 
+                       active:scale-95 disabled:bg-slate-600 disabled:shadow-none 
+                       transition-all duration-300 cursor-pointer"
             >
-              {isSubmitting ? 'Sending...please wait' : 'Send Message'}
+              {isSubmitting ? 'Sending... Please wait' : 'Send Message'}
             </button>
           </div>
         </form>
       </div>
     </div>
-
-
-
-    )
-
-
-
-};
+  );
+}
