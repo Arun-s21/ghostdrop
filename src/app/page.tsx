@@ -6,13 +6,13 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    // 1. Changed the background to our dark theme color
+    
     <div className="flex flex-col items-center justify-center min-h-screen">
       
-      {/* 2. Changed the card to have the "glass" effect */}
+ 
       <div className="w-full max-w-2xl p-8 space-y-8 text-center bg-slate-800/50 border border-slate-700 rounded-lg shadow-lg backdrop-blur-sm">
         
-        {/* 3. Updated text colors to be bright on a dark background */}
+     
         <h1 className="text-4xl font-extrabold ... text-white">
           Welcome to <span className="text-gray-800">Ghost</span>Drop
         </h1>
