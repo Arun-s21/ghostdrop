@@ -80,8 +80,9 @@ checkLoginStatus();
           alt="GhostDrop Logo" 
           width={60} 
           height={60} 
-        /><span className="text-2xl font-bold text-gray-800">
-          GhostDrop
+        /><span className="text-2xl font-bold text-white">
+            <span className="text-gray-800">Ghost</span>
+            Drop
         </span>
         </Link>
         <div>
@@ -106,7 +107,9 @@ checkLoginStatus();
          // If logged out, show the Login button
           <button
             onClick={() => router.push('/sign-in')}
-            className="bg-blue-600 text-white cursor-pointer px-4 py-2 rounded-md hover:bg-blue-800 transition-colors"
+            className="px-6 py-1 text-lg font-bold text-white rounded-md relative overflow-hidden 
+             border border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.6)] 
+             hover:shadow-[0_0_25px_rgba(6,182,212,1)] transition-all cursor-pointer duration-300"
           >
             Login
           </button>
