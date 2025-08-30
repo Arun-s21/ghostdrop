@@ -7,7 +7,7 @@ export default function Home() {
 
   return (
     
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black/60">
       
  
       <div className="w-full max-w-2xl p-8 space-y-8 text-center bg-slate-800/50 border border-slate-700 rounded-lg shadow-lg backdrop-blur-sm">
