@@ -37,7 +37,7 @@ export default function DashboardPage() {
     fetchData();
   }, []);
 
-// This function now handles everything: the API call and the UI update
+
   const handleDeleteMessage = async (messageId: string) => {
     //  the message from the screen immediately
     setMessages(messages.filter((message) => message._id !== messageId));
@@ -73,7 +73,7 @@ export default function DashboardPage() {
 
 return (
   <div className="min-h-screen p-6 relative flex items-center justify-center">
-    {/* Overlay for brand consistency */}
+  
     <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
 
     <div className="relative z-10 w-full max-w-3xl p-8 rounded-xl 
